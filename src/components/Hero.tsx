@@ -18,7 +18,7 @@ export default function Hero() {
         </p>
         <h1 className="font-signifier text-[40px] leading-[1.1] tracking-[-1px] text-ink sm:text-[64px] sm:tracking-[-1.6px]">
           업무는 옮겨가도,
-          <br className="hidden sm:block" /> 노하우는 남도록.
+          <br /> 노하우는 남도록.
         </h1>
         <p className="mx-auto mt-5 max-w-[560px] text-[16px] leading-[1.5] text-ash sm:text-[18px]">
           전임자의 업무 설명·주의사항·법령·노하우를 한 장의 카드로.
