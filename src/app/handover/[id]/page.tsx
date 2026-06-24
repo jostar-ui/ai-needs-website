@@ -192,7 +192,7 @@ export default function HandoverDetailPage() {
 
         {item.checklist.length > 0 && (
           <div className="border-t border-dove/50 py-5">
-            <dt className="mb-3 text-[13px] font-[450] tracking-[-0.01em] text-graphite">인수인계 체크리스트</dt>
+            <dt className="mb-3 text-[13px] font-[450] tracking-[-0.01em] text-graphite">업무 체크리스트</dt>
             <dd className="space-y-2">
               {item.checklist.map((c, i) => (
                 <div key={i} className="flex items-center gap-2.5 text-[15px] text-ink">

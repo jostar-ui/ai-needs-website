@@ -443,7 +443,7 @@ export default function HandoverForm({
       {/* 체크리스트 */}
       <div>
         <div className="mb-3 flex items-center justify-between">
-          <span className={labelBase + " mb-0"}>인수인계 체크리스트</span>
+          <span className={labelBase + " mb-0"}>업무 체크리스트</span>
           <button type="button" onClick={addCheckItem} className="text-[13px] font-[450] text-ink hover:text-ash">+ 항목 추가</button>
         </div>
         <div className="space-y-2">
