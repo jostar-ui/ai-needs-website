@@ -48,14 +48,14 @@ function DeptRanking({ items, onDeptClick }: { items: Handover[]; onDeptClick: (
         onClick={() => setOpen((v) => !v)}
         className="flex w-full items-center justify-between px-6 py-4 text-left"
       >
-        <div className="flex items-center gap-3">
-          <span className="text-[18px]">🏆</span>
-          <div>
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="shrink-0 text-[18px]">🏆</span>
+          <div className="min-w-0">
             <p className="text-[15px] font-[480] text-ink">부서별 인수인계 현황</p>
             <p className="text-[12px] text-graphite">총 {total}건 등록됨 · 클릭하면 해당 부서 목록으로 이동</p>
           </div>
         </div>
-        <span className="text-[12px] text-graphite">{open ? "접기 ▲" : "펼치기 ▼"}</span>
+        <span className="shrink-0 whitespace-nowrap text-[12px] text-graphite">{open ? "접기 ▲" : "펼치기 ▼"}</span>
       </button>
 
       {open && (
@@ -164,7 +164,7 @@ export default function HomePage() {
         </div>
 
         {/* 중요도 필터 + 정렬 */}
-        <div className="mt-4 flex flex-wrap items-center gap-2">
+        <div className="mt-4 flex items-center justify-between gap-2">
           <div className="flex flex-wrap gap-2">
             {PRIORITY_FILTER_OPTIONS.map((p) => (
               <button
@@ -182,7 +182,7 @@ export default function HomePage() {
               </button>
             ))}
           </div>
-          <div className="ml-auto">
+          <div className="shrink-0">
             <div className="relative">
               <select
                 value={sortKey}
