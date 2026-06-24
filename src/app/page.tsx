@@ -76,7 +76,7 @@ function DeptRanking({ items, onDeptClick }: { items: Handover[]; onDeptClick: (
                     )}
                   </span>
                   {/* 부서명 */}
-                  <span className="w-28 shrink-0 text-[13px] font-[450] text-ink group-hover:text-rust group-hover:underline sm:w-36">
+                  <span className="w-24 shrink-0 truncate text-[13px] font-[450] text-ink group-hover:text-rust group-hover:underline sm:w-36">
                     {dept}
                   </span>
                   {/* 바 */}

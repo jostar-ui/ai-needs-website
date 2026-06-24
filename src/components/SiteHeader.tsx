@@ -14,7 +14,7 @@ export default function SiteHeader() {
 
         <Link
           href="/new"
-          className="rounded-pill bg-ink px-5 py-2 text-[15px] font-[450] tracking-[-0.009em] text-pure-white transition-opacity hover:opacity-90"
+          className="rounded-pill bg-ink px-4 py-1.5 text-[14px] font-[450] tracking-[-0.009em] text-pure-white transition-opacity hover:opacity-90 sm:px-5 sm:py-2 sm:text-[15px]"
         >
           새 업무 등록
         </Link>

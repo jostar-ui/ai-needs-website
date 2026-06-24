@@ -105,19 +105,30 @@ export default function HandoverDetailPage() {
   return (
     <div className="mx-auto max-w-[760px] px-5 py-12 sm:px-8 sm:py-16 print:py-6">
       {/* 상단 네비게이션 */}
-      <div className="mb-8 flex flex-wrap items-center gap-3 print:hidden">
-        <Link href="/" className="inline-flex items-center gap-1.5 text-[14px] text-graphite hover:text-ink">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
-          목록으로
-        </Link>
-        <div className="ml-auto flex flex-wrap items-center gap-3">
-          <button onClick={() => window.print()} className="text-[14px] text-graphite hover:text-ink">인쇄</button>
-          <button onClick={handleCopy} className="text-[14px] text-graphite hover:text-ink">업무 복사</button>
-          <Link href={`/handover/${id}/history`} className="text-[14px] text-graphite hover:text-ink">수정 이력</Link>
-          <button onClick={() => setReportOpen(true)} className="text-[14px] text-graphite hover:text-rust">신고</button>
-          <Link href={`/handover/${id}/edit`} className="rounded-pill bg-ink px-5 py-2 text-[14px] font-[450] text-pure-white hover:opacity-90">
-            수정
+      <div className="mb-8 print:hidden">
+        <div className="flex items-center gap-3">
+          <Link href="/" className="inline-flex items-center gap-1.5 text-[14px] text-graphite hover:text-ink">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+            목록으로
           </Link>
+          <div className="ml-auto flex items-center gap-3">
+            <div className="hidden items-center gap-3 sm:flex">
+              <button onClick={() => window.print()} className="text-[14px] text-graphite hover:text-ink">인쇄</button>
+              <button onClick={handleCopy} className="text-[14px] text-graphite hover:text-ink">업무 복사</button>
+              <Link href={`/handover/${id}/history`} className="text-[14px] text-graphite hover:text-ink">수정 이력</Link>
+              <button onClick={() => setReportOpen(true)} className="text-[14px] text-graphite hover:text-rust">신고</button>
+            </div>
+            <Link href={`/handover/${id}/edit`} className="rounded-pill bg-ink px-5 py-2 text-[14px] font-[450] text-pure-white hover:opacity-90">
+              수정
+            </Link>
+          </div>
+        </div>
+        {/* 모바일 전용 보조 액션 */}
+        <div className="mt-3 flex flex-wrap gap-4 sm:hidden">
+          <button onClick={() => window.print()} className="text-[13px] text-graphite hover:text-ink">인쇄</button>
+          <button onClick={handleCopy} className="text-[13px] text-graphite hover:text-ink">업무 복사</button>
+          <Link href={`/handover/${id}/history`} className="text-[13px] text-graphite hover:text-ink">수정 이력</Link>
+          <button onClick={() => setReportOpen(true)} className="text-[13px] text-graphite hover:text-rust">신고</button>
         </div>
       </div>
 
@@ -133,7 +144,7 @@ export default function HandoverDetailPage() {
           </span>
         )}
       </div>
-      <h1 className="font-signifier text-[40px] leading-[1.12] tracking-[-0.8px] text-ink">
+      <h1 className="font-signifier text-[28px] leading-[1.2] tracking-[-0.5px] text-ink sm:text-[40px] sm:leading-[1.12] sm:tracking-[-0.8px]">
         {item.taskName}
       </h1>
       <p className="mt-3 text-[13px] tracking-[-0.01em] text-graphite">
@@ -274,7 +285,7 @@ export default function HandoverDetailPage() {
                 onChange={(e) => setAcceptName(e.target.value)}
                 placeholder="담당자 이름 입력"
                 autoFocus={changingAssignee}
-                className="rounded-input border border-dove px-4 py-2.5 text-[14px] outline-none focus:border-ink"
+                className="min-w-0 flex-1 rounded-input border border-dove px-4 py-2.5 text-[14px] outline-none focus:border-ink sm:flex-none"
               />
               <button
                 onClick={async () => { await handleAccept(); setChangingAssignee(false); }}
