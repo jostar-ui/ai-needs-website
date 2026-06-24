@@ -91,7 +91,7 @@ export default function HandoverForm({
   const [editorName, setEditorName] = useState("");
   const [error, setError] = useState("");
 
-  // 관련 인수인계
+  // 관련 업무위키
   const [relatedIds, setRelatedIds] = useState<string[]>(initial?.relatedIds ?? []);
   const [relatedSearch, setRelatedSearch] = useState("");
   const [relatedResults, setRelatedResults] = useState<Handover[]>([]);
@@ -106,13 +106,13 @@ export default function HandoverForm({
     setTemplates(templateStore.list());
   }, []);
 
-  // 관련 인수인계 ID → 실제 항목 불러오기
+  // 관련 업무위키 ID → 실제 항목 불러오기
   useEffect(() => {
     if (relatedIds.length === 0) { setRelatedItems([]); return; }
     repository.getByIds(relatedIds).then(setRelatedItems);
   }, [relatedIds]);
 
-  // 관련 인수인계 검색
+  // 관련 업무위키 검색
   useEffect(() => {
     const q = relatedSearch.trim();
     if (!q) { setRelatedResults([]); return; }
@@ -533,9 +533,9 @@ export default function HandoverForm({
         <p className="mt-1.5 text-[12px] text-graphite">PDF, Word, Excel, HWP, 이미지 등 · 최대 10MB</p>
       </div>
 
-      {/* 관련 인수인계 연결 */}
+      {/* 관련 업무위키 연결 */}
       <div>
-        <span className={labelBase}>관련 인수인계 연결</span>
+        <span className={labelBase}>관련 업무위키 연결</span>
         {relatedItems.length > 0 && (
           <div className="mb-3 flex flex-wrap gap-2">
             {relatedItems.map((r) => (

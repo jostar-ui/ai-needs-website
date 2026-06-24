@@ -21,7 +21,7 @@ export default function HandoverDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { item, loading, refresh } = useHandover(id);
 
-  // 관련 인수인계
+  // 관련 업무위키
   const [relatedItems, setRelatedItems] = useState<Handover[]>([]);
 
   useEffect(() => {
@@ -236,10 +236,10 @@ export default function HandoverDetailPage() {
         )}
       </dl>
 
-      {/* 관련 인수인계 */}
+      {/* 관련 업무위키 */}
       {relatedItems.length > 0 && (
         <div className="mt-5 rounded-card bg-pure-white p-6 shadow-card sm:p-8">
-          <p className="mb-4 text-[13px] font-[450] tracking-[-0.01em] text-graphite">관련 인수인계</p>
+          <p className="mb-4 text-[13px] font-[450] tracking-[-0.01em] text-graphite">관련 업무위키</p>
           <div className="space-y-2">
             {relatedItems.map((r) => (
               <Link
