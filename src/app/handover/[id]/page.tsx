@@ -311,7 +311,7 @@ export default function HandoverDetailPage() {
       <div className="mt-6 print:hidden">
         {!confirmDelete ? (
           <button onClick={() => setConfirmDelete(true)} className="text-[14px] font-[450] text-graphite hover:text-rust">
-            이 인수인계 삭제
+            이 업무위키 삭제
           </button>
         ) : (
           <div className="rounded-card border border-dove/70 p-5">
