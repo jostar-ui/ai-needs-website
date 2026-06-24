@@ -65,6 +65,8 @@ export default function AdminPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [deactivating, setDeactivating] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [editingAuthorId, setEditingAuthorId] = useState<string | null>(null);
+  const [authorInput, setAuthorInput] = useState("");
 
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -133,6 +135,13 @@ export default function AdminPage() {
     await repository.restore(id, "관리자");
     await load();
     setRestoring(null);
+  }
+
+  async function handleAuthorSave(id: string) {
+    await repository.updateAuthor(id, authorInput.trim() || "익명");
+    await load();
+    setEditingAuthorId(null);
+    setAuthorInput("");
   }
 
   async function handleSeed() {
@@ -290,7 +299,41 @@ export default function AdminPage() {
                     {item.taskName}
                   </Link>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* 작성자 편집 */}
+                  {editingAuthorId === item.id ? (
+                    <div className="flex items-center gap-2">
+                      <input
+                        autoFocus
+                        type="text"
+                        value={authorInput}
+                        onChange={(e) => setAuthorInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleAuthorSave(item.id);
+                          if (e.key === "Escape") { setEditingAuthorId(null); setAuthorInput(""); }
+                        }}
+                        placeholder="작성자명"
+                        className="w-28 rounded-[8px] border border-dove px-3 py-1 text-[13px] outline-none focus:border-ink"
+                      />
+                      <button onClick={() => handleAuthorSave(item.id)}
+                        className="rounded-pill bg-ink px-3 py-1 text-[12px] text-pure-white hover:opacity-90">
+                        저장
+                      </button>
+                      <button onClick={() => { setEditingAuthorId(null); setAuthorInput(""); }}
+                        className="text-[12px] text-graphite hover:text-ink">
+                        취소
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => { setEditingAuthorId(item.id); setAuthorInput(item.createdBy ?? ""); }}
+                      className="flex items-center gap-1 text-[13px] text-graphite hover:text-ink"
+                      title="작성자 변경"
+                    >
+                      <span>{item.createdBy || "익명"}</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-dove"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+                    </button>
+                  )}
                   <span className="text-[13px] text-graphite">{formatDate(item.createdAt)}</span>
                   {isDeleted && (
                     <button onClick={() => handleRestore(item.id)} disabled={restoring === item.id}

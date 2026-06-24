@@ -190,6 +190,14 @@ export const repository = {
     if (error) throw error;
   },
 
+  async updateAuthor(id: string, authorName: string): Promise<void> {
+    const { error } = await supabase
+      .from('handovers')
+      .update({ created_by: authorName })
+      .eq('id', id);
+    if (error) throw error;
+  },
+
   async getByIds(ids: string[]): Promise<Handover[]> {
     if (ids.length === 0) return [];
     const { data, error } = await supabase

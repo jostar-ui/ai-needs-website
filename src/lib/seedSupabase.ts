@@ -8,7 +8,7 @@ interface SeedRecord {
 
 const SEED_RECORDS: SeedRecord[] = [
   {
-    author: '김재원',
+    author: '익명',
     input: {
       department: '예산법무과',
       taskName: '본예산 편성',
@@ -41,7 +41,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '박지은',
+    author: '익명',
     input: {
       department: '일자리경제과',
       taskName: '지역화폐(시루) 운영 관리',
@@ -71,7 +71,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '이민준',
+    author: '익명',
     input: {
       department: '시민안전과',
       taskName: '재난안전대책본부 운영',
@@ -129,7 +129,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '정태현',
+    author: '익명',
     input: {
       department: '교통행정과',
       taskName: '버스 준공영제 정산',
@@ -159,7 +159,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '한미영',
+    author: '익명',
     input: {
       department: '생활보장과',
       taskName: '국민기초생활 급여 관리',
@@ -188,7 +188,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '윤성호',
+    author: '익명',
     input: {
       department: '정보통신과',
       taskName: '정보시스템 운영 관리',
@@ -216,7 +216,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '강은지',
+    author: '익명',
     input: {
       department: '복지정책과',
       taskName: '사회보장 신설·변경 협의',
@@ -244,7 +244,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '임도윤',
+    author: '익명',
     input: {
       department: '문화예술과',
       taskName: '공연·전시 지원 사업 운영',
@@ -300,7 +300,7 @@ const SEED_RECORDS: SeedRecord[] = [
     },
   },
   {
-    author: '신준서',
+    author: '익명',
     input: {
       department: '정왕1동',
       taskName: '주민자치회 운영 지원',
