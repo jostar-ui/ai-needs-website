@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import type { Handover } from "@/lib/types";
-import { formatDate, maskName } from "@/lib/format";
+import { formatDate, maskName, timeAgo } from "@/lib/format";
 
 const PRIORITY_STYLE: Record<Handover["priority"], string> = {
   높음: "bg-red-50 text-red-700 border-red-200",
@@ -28,7 +28,23 @@ function AuthorLabel({ createdBy, updatedBy }: { createdBy: string | null; updat
   );
 }
 
-export default function HandoverCard({ item, index = 0 }: { item: Handover; index?: number }) {
+function Highlight({ text, query }: { text: string; query: string }) {
+  if (!query.trim()) return <>{text}</>;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const parts = text.split(new RegExp(`(${escaped})`, "gi"));
+  const lower = query.toLowerCase();
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.toLowerCase() === lower ? (
+          <mark key={i} className="rounded-[2px] bg-yellow-200 text-ink">{part}</mark>
+        ) : part
+      )}
+    </>
+  );
+}
+
+export default function HandoverCard({ item, index = 0, query = "" }: { item: Handover; index?: number; query?: string }) {
   const router = useRouter();
   const uniqueCycles = [...new Set(item.schedules.map((s) => s.cycle))];
   const stale = isStale(item.updatedAt);
@@ -76,7 +92,7 @@ export default function HandoverCard({ item, index = 0 }: { item: Handover; inde
 
       {/* 업무명 */}
       <h3 className="text-[20px] font-[480] leading-[1.2] tracking-[-0.02em] text-ink transition-colors group-hover:text-rust">
-        {item.taskName}
+        <Highlight text={item.taskName} query={query} />
       </h3>
 
       {/* 주기 칩들 */}
@@ -92,7 +108,9 @@ export default function HandoverCard({ item, index = 0 }: { item: Handover; inde
 
       {/* 업무 설명 2줄 클램프 */}
       {item.description && (
-        <p className="mt-3 line-clamp-2 text-[14px] leading-[1.5] text-ash">{item.description}</p>
+        <p className="mt-3 line-clamp-2 text-[14px] leading-[1.5] text-ash">
+          <Highlight text={item.description} query={query} />
+        </p>
       )}
 
       {/* 시스템 태그 */}
@@ -108,14 +126,24 @@ export default function HandoverCard({ item, index = 0 }: { item: Handover; inde
       )}
 
       <div className="mt-auto flex items-center justify-between pt-5">
-        <span className="text-[13px] tracking-[-0.01em] text-graphite">
-          등록 {formatDate(item.createdAt)}
-        </span>
-        {stale && (
-          <span className="rounded-pill bg-apricot-wash px-2 py-0.5 text-[11px] font-[450] text-rust">
-            검토 필요
+        <div className="flex items-center gap-2">
+          <span className="text-[13px] tracking-[-0.01em] text-graphite">
+            등록 {formatDate(item.createdAt)}
           </span>
-        )}
+          {item.updatedAt !== item.createdAt && (
+            <span className="text-[12px] text-graphite/60">· 수정 {timeAgo(item.updatedAt)}</span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          {item.helpfulCount > 0 && (
+            <span className="text-[12px] text-graphite/60">👍 {item.helpfulCount}</span>
+          )}
+          {stale && (
+            <span className="rounded-pill bg-apricot-wash px-2 py-0.5 text-[11px] font-[450] text-rust">
+              검토 필요
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import EmptyState from "@/components/EmptyState";
 import DetailField from "@/components/DetailField";
 import { useHandover } from "@/lib/useHandovers";
 import { repository, reportRepository } from "@/lib/repository";
-import { formatDate, maskName } from "@/lib/format";
+import { formatDate, maskName, timeAgo } from "@/lib/format";
 import { REPORT_REASONS, type ReportReason, type Handover } from "@/lib/types";
 
 const PRIORITY_STYLE: Record<string, string> = {
@@ -37,6 +37,31 @@ export default function HandoverDetailPage() {
   const [acceptName, setAcceptName] = useState("");
   const [acceptLoading, setAcceptLoading] = useState(false);
   const [changingAssignee, setChangingAssignee] = useState(false);
+
+  // URL 복사
+  const [copied, setCopied] = useState(false);
+  async function handleCopyUrl() {
+    await navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  // 도움됐어요
+  const [helpful, setHelpful] = useState(false);
+  const [helpfulCount, setHelpfulCount] = useState(0);
+  useEffect(() => {
+    if (item) {
+      setHelpfulCount(item.helpfulCount);
+      setHelpful(!!localStorage.getItem(`helpful_${item.id}`));
+    }
+  }, [item]);
+  async function handleHelpful() {
+    if (helpful || !item) return;
+    const newCount = await repository.incrementHelpful(item.id);
+    setHelpfulCount(newCount);
+    setHelpful(true);
+    localStorage.setItem(`helpful_${item.id}`, "1");
+  }
 
   // 신고 모달
   const [reportOpen, setReportOpen] = useState(false);
@@ -113,6 +138,9 @@ export default function HandoverDetailPage() {
           </Link>
           <div className="ml-auto flex items-center gap-3">
             <div className="hidden items-center gap-3 sm:flex">
+              <button onClick={handleCopyUrl} className="text-[14px] text-graphite hover:text-ink">
+                {copied ? "✓ 복사됨" : "링크 복사"}
+              </button>
               <button onClick={() => window.print()} className="text-[14px] text-graphite hover:text-ink">인쇄</button>
               <button onClick={handleCopy} className="text-[14px] text-graphite hover:text-ink">업무 복사</button>
               <Link href={`/handover/${id}/history`} className="text-[14px] text-graphite hover:text-ink">수정 이력</Link>
@@ -125,6 +153,9 @@ export default function HandoverDetailPage() {
         </div>
         {/* 모바일 전용 보조 액션 */}
         <div className="mt-3 flex flex-wrap gap-4 sm:hidden">
+          <button onClick={handleCopyUrl} className="text-[13px] text-graphite hover:text-ink">
+            {copied ? "✓ 복사됨" : "링크 복사"}
+          </button>
           <button onClick={() => window.print()} className="text-[13px] text-graphite hover:text-ink">인쇄</button>
           <button onClick={handleCopy} className="text-[13px] text-graphite hover:text-ink">업무 복사</button>
           <Link href={`/handover/${id}/history`} className="text-[13px] text-graphite hover:text-ink">수정 이력</Link>
@@ -149,7 +180,9 @@ export default function HandoverDetailPage() {
       </h1>
       <p className="mt-3 text-[13px] tracking-[-0.01em] text-graphite">
         등록일 {formatDate(item.createdAt)}
-        {item.updatedAt !== item.createdAt && <> · 최종수정일 {formatDate(item.updatedAt)}</>}
+        {item.updatedAt !== item.createdAt && (
+          <> · 마지막 수정 {timeAgo(item.updatedAt)} <span className="text-graphite/50">({formatDate(item.updatedAt)})</span></>
+        )}
         {item.isAccepted && item.acceptedAt && <> · 담당 지정 {formatDate(item.acceptedAt)}</>}
       </p>
 
@@ -305,6 +338,29 @@ export default function HandoverDetailPage() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* 도움됐어요 */}
+      <div className="mt-8 flex items-center gap-4 print:hidden">
+        <button
+          onClick={handleHelpful}
+          disabled={helpful}
+          className={[
+            "flex items-center gap-2 rounded-pill border px-5 py-2.5 text-[14px] font-[450] transition-all",
+            helpful
+              ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+              : "border-dove bg-pure-white text-graphite hover:border-ink hover:text-ink",
+          ].join(" ")}
+        >
+          <span>{helpful ? "✓" : "👍"}</span>
+          <span>도움됐어요</span>
+          {helpfulCount > 0 && (
+            <span className={`rounded-pill px-1.5 py-0.5 text-[12px] ${helpful ? "bg-emerald-100 text-emerald-700" : "bg-fog text-graphite"}`}>
+              {helpfulCount}
+            </span>
+          )}
+        </button>
+        <span className="text-[13px] text-graphite/50">이 업무위키가 도움이 됐나요?</span>
       </div>
 
       {/* 삭제 */}

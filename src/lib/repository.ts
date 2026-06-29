@@ -27,6 +27,7 @@ function toHandover(row: Record<string, unknown>): Handover {
     acceptedBy: (row.accepted_by as string | null) ?? null,
     createdBy: (row.created_by as string | null) ?? null,
     updatedBy: (row.updated_by as string | null) ?? null,
+    helpfulCount: (row.helpful_count as number) ?? 0,
     status: row.status as 'active' | 'deleted',
     createdAt: row.created_at as string,
     updatedAt: row.updated_at as string,
@@ -188,6 +189,12 @@ export const repository = {
       .update({ is_accepted: false, accepted_at: null, accepted_by: null })
       .eq('id', id);
     if (error) throw error;
+  },
+
+  async incrementHelpful(id: string): Promise<number> {
+    const { data, error } = await supabase.rpc('increment_helpful', { row_id: id });
+    if (error) throw error;
+    return (data as number) ?? 0;
   },
 
   async updateAuthor(id: string, authorName: string): Promise<void> {

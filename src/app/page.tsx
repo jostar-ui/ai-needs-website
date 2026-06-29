@@ -233,7 +233,7 @@ export default function HomePage() {
           <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((item, index) => (
               <li key={item.id}>
-                <HandoverCard item={item} index={index} />
+                <HandoverCard item={item} index={index} query={query} />
               </li>
             ))}
           </ul>

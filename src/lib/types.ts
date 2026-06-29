@@ -25,12 +25,13 @@ export interface Handover {
   acceptedBy: string | null;
   createdBy: string | null;
   updatedBy: string | null;
+  helpfulCount: number;
   status: 'active' | 'deleted';
   createdAt: string;
   updatedAt: string;
 }
 
-export type HandoverInput = Omit<Handover, 'id' | 'createdAt' | 'updatedAt' | 'isAccepted' | 'acceptedAt' | 'acceptedBy' | 'createdBy' | 'updatedBy'>;
+export type HandoverInput = Omit<Handover, 'id' | 'createdAt' | 'updatedAt' | 'isAccepted' | 'acceptedAt' | 'acceptedBy' | 'createdBy' | 'updatedBy' | 'helpfulCount'>;
 
 export interface HandoverTemplate {
   id: string;
