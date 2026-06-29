@@ -51,7 +51,7 @@ function DeptRanking({ items, onDeptClick }: { items: Handover[]; onDeptClick: (
         <div className="flex min-w-0 items-center gap-3">
           <span className="shrink-0 text-[18px]">🏆</span>
           <div className="min-w-0">
-            <p className="text-[15px] font-[480] text-ink">부서별 인수인계 현황</p>
+            <p className="text-[15px] font-[480] text-ink">부서별 업무위키 현황</p>
             <p className="text-[12px] text-graphite">총 {total}건 등록됨 · 클릭하면 해당 부서 목록으로 이동</p>
           </div>
         </div>
@@ -213,7 +213,7 @@ export default function HomePage() {
         {/* 목록 헤더 */}
         <div className="mb-5 flex items-baseline justify-between" style={{ marginTop: isSearching ? "40px" : "0" }}>
           <h2 className="text-[22px] font-medium tracking-[-0.02em] text-ink">
-            {isSearching ? "검색 결과" : "최근 등록된 인수인계"}
+            {isSearching ? "검색 결과" : "최근 등록된 업무위키"}
           </h2>
           {!loading && (
             <span className="text-[14px] text-graphite">{filtered.length}건</span>
@@ -226,8 +226,8 @@ export default function HomePage() {
           <p className="py-16 text-center text-[15px] text-graphite">불러오는 중…</p>
         ) : filtered.length === 0 ? (
           <EmptyState
-            title={isSearching ? "조건에 맞는 인수인계가 없어요" : "아직 등록된 인수인계가 없어요"}
-            description={isSearching ? "검색어나 필터를 바꿔보세요." : "우측 상단의 '새 인수인계 등록'으로 첫 업무를 남겨보세요."}
+            title={isSearching ? "조건에 맞는 업무위키가 없어요" : "아직 등록된 업무위키가 없어요"}
+            description={isSearching ? "검색어나 필터를 바꿔보세요." : "우측 상단의 '새 업무 등록'으로 첫 업무를 남겨보세요."}
           />
         ) : (
           <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

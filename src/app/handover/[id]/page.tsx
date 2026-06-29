@@ -94,7 +94,7 @@ export default function HandoverDetailPage() {
   if (!item) {
     return (
       <div className="mx-auto max-w-[760px] px-5 py-16 sm:px-8">
-        <EmptyState title="존재하지 않는 인수인계예요" description="삭제되었거나 잘못된 주소입니다." />
+        <EmptyState title="존재하지 않는 업무위키예요" description="삭제되었거나 잘못된 주소입니다." />
         <div className="mt-6 text-center">
           <Link href="/" className="text-[15px] font-[450] text-ink hover:text-ash">목록으로 돌아가기</Link>
         </div>

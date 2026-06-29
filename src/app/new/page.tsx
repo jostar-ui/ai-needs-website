@@ -28,7 +28,7 @@ export default function NewHandoverPage() {
       </Link>
 
       <h1 className="font-signifier text-[40px] leading-[1.1] tracking-[-0.8px] text-ink">
-        새 인수인계 등록
+        새 업무 등록
       </h1>
       <p className="mb-10 mt-3 text-[16px] leading-[1.5] text-ash">
         후임자가 바로 이어받을 수 있도록 업무의 핵심을 남겨주세요.

@@ -23,7 +23,7 @@ export default function EditHandoverPage() {
   if (!item) {
     return (
       <div className="mx-auto max-w-[760px] px-5 py-16 sm:px-8">
-        <p className="text-center text-[15px] text-graphite">존재하지 않는 인수인계입니다.</p>
+        <p className="text-center text-[15px] text-graphite">존재하지 않는 업무위키입니다.</p>
         <div className="mt-6 text-center">
           <Link href="/" className="text-[15px] font-[450] text-ink hover:text-ash">목록으로 돌아가기</Link>
         </div>
@@ -43,7 +43,7 @@ export default function EditHandoverPage() {
         상세로
       </Link>
       <h1 className="mb-10 font-signifier text-[40px] leading-[1.1] tracking-[-0.8px] text-ink">
-        인수인계 수정
+        업무위키 수정
       </h1>
       <HandoverForm
         initial={item}

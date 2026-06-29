@@ -36,7 +36,7 @@ function exportCsv(items: Handover[]) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `인수인계_${new Date().toISOString().slice(0, 10)}.csv`;
+  a.download = `업무위키_${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -192,7 +192,7 @@ export default function AdminPage() {
           <div className="flex items-center gap-6">
             <div className="text-center">
               <p className="text-[28px] font-[480] text-ink">{stats.total}</p>
-              <p className="text-[12px] text-graphite">활성 인수인계</p>
+              <p className="text-[12px] text-graphite">활성 업무</p>
             </div>
             <div className="text-center">
               <p className="text-[28px] font-[480] text-ink">{stats.acceptedCount}</p>

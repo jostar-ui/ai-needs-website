@@ -123,7 +123,7 @@ export default function AdminReportsPage() {
                     <p className="text-[14px] text-ink">{r.reporterName}</p>
                   </div>
                   <div>
-                    <p className="text-[13px] text-graphite">대상 인수인계</p>
+                    <p className="text-[13px] text-graphite">대상 업무위키</p>
                     <Link
                       href={`/handover/${r.handoverId}`}
                       className="text-[14px] text-ink underline hover:text-ash"
