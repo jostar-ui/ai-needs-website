@@ -341,26 +341,30 @@ export default function HandoverDetailPage() {
       </div>
 
       {/* 도움됐어요 */}
-      <div className="mt-8 flex items-center gap-4 print:hidden">
-        <button
-          onClick={handleHelpful}
-          disabled={helpful}
-          className={[
-            "flex items-center gap-2 rounded-pill border px-5 py-2.5 text-[14px] font-[450] transition-all",
-            helpful
-              ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-              : "border-dove bg-pure-white text-graphite hover:border-ink hover:text-ink",
-          ].join(" ")}
-        >
-          <span>{helpful ? "✓" : "👍"}</span>
-          <span>도움됐어요</span>
-          {helpfulCount > 0 && (
-            <span className={`rounded-pill px-1.5 py-0.5 text-[12px] ${helpful ? "bg-emerald-100 text-emerald-700" : "bg-fog text-graphite"}`}>
-              {helpfulCount}
-            </span>
-          )}
-        </button>
-        <span className="text-[13px] text-graphite/50">이 업무위키가 도움이 됐나요?</span>
+      <div className="mt-8 rounded-card border border-dove/60 p-5 print:hidden">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p className="text-[14px] font-[450] text-ink">이 업무위키가 도움이 됐나요?</p>
+            <p className="mt-0.5 text-[13px] text-graphite">
+              {helpfulCount > 0
+                ? <><span className="font-[500] text-emerald-600">{helpfulCount}명</span>이 도움됐다고 했어요</>
+                : "아직 도움됐다는 반응이 없어요"}
+            </p>
+          </div>
+          <button
+            onClick={handleHelpful}
+            disabled={helpful}
+            className={[
+              "flex items-center gap-2 rounded-pill border px-5 py-2.5 text-[14px] font-[450] transition-all",
+              helpful
+                ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                : "border-dove bg-pure-white text-graphite hover:border-ink hover:text-ink",
+            ].join(" ")}
+          >
+            <span>{helpful ? "✓" : "👍"}</span>
+            <span>{helpful ? "도움됐어요!" : "도움됐어요"}</span>
+          </button>
+        </div>
       </div>
 
       {/* 삭제 */}
